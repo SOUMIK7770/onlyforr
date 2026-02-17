@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>For My Love ❤️</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background: linear-gradient(to bottom, #ffdde1, #ee9ca7);
+        color: #333;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      #lockScreen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        text-align: center;
+        padding: 20px;
+      }
+
+      #lockScreen h1 {
+        color: #b30059;
+        margin-bottom: 15px;
+      }
+      #lockScreen input {
+        padding: 10px;
+        border: none;
+        border-radius: 20px;
+        width: 220px;
+        text-align: center;
+      }
+      #lockScreen button {
+        margin-top: 12px;
+        padding: 8px 20px;
+        border: none;
+        border-radius: 20px;
+        background: #ff4d88;
+        color: #fff;
+      }
+
+      header {
+        text-align: center;
+        padding: 40px 20px;
+        background: rgba(255, 255, 255, 0.3);
+      }
+      header h1 {
+        font-size: 2.4rem;
+        color: #b30059;
+      }
+
+      section {
+        padding: 25px 15px;
+        margin: 15px;
+        background: rgba(255, 255, 255, 0.92);
+        border-radius: 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        text-align: center;
+        color: #cc0066;
+        margin-bottom: 15px;
+      }
+
+      .timer {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        text-align: center;
+      }
+      .time-box {
+        background: #ffe6f0;
+        padding: 14px 8px;
+        border-radius: 15px;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+      }
+      .time-box h3 {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #b30059;
+      }
+      .time-box p {
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: #666;
+      }
+
+      .year-title {
+        margin: 10px 0 8px;
+        text-align: center;
+        font-weight: 700;
+        color: #b30059;
+        font-size: 1.1rem;
+      }
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+      .gallery img {
+        width: 100%;
+        height: 110px;
+        object-fit: cover;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+      }
+      .gallery img:hover {
+        transform: scale(1.03);
+      }
+
+      /* Fullscreen Viewer */
+      #viewer {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.85);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+      }
+      #viewer img {
+        max-width: 95%;
+        max-height: 95%;
+        border-radius: 12px;
+      }
+      #viewer span {
+        position: absolute;
+        top: 20px;
+        right: 25px;
+        font-size: 28px;
+        color: #fff;
+        cursor: pointer;
+      }
+
+      .message {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        text-align: center;
+        white-space: pre-line;
+      }
+
+      .music-card {
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        border-radius: 18px;
+        padding: 18px;
+        text-align: center;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+      }
+      .music-title {
+        font-weight: 700;
+        color: #b30059;
+        margin-bottom: 6px;
+      }
+      .music-sub {
+        font-size: 0.8rem;
+        color: #444;
+        margin-bottom: 12px;
+      }
+      .music-card audio {
+        width: 100%;
+        border-radius: 12px;
+      }
+
+      .notes {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .note {
+        background: #fff0f6;
+        padding: 12px;
+        border-radius: 12px;
+      }
+
+      .btn {
+        padding: 10px 22px;
+        background: #ff4d88;
+        color: #fff;
+        border: none;
+        border-radius: 25px;
+        font-size: 0.9rem;
+      }
+
+      .heart {
+        position: fixed;
+        bottom: -20px;
+        font-size: 20px;
+        animation: float 6s linear infinite;
+      }
+      @keyframes float {
+        0% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100vh);
+          opacity: 0;
+        }
+      }
+
+      footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 0.8rem;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="lockScreen">
+      <h1>Only For Rupali ❤️</h1>
+      <p>Enter Our Secret Code 💕</p>
+      <input type="password" id="pass" placeholder="Password" />
+      <button onclick="unlock()">Unlock</button>
+      <p id="error" style="color: red; margin-top: 8px"></p>
+    </div>
+
+    <header>
+      <h1>For My Rupali ❤️</h1>
+      <p>Since 21 August 2022, Always Yours</p>
+    </header>
+
+    <section>
+      <h2>My Heart 💕</h2>
+      <div class="message">
+        Dear Rupali, You are my peace, my smile, my forever. Every heartbeat of
+        mine belongs to you. This world is just for you ❤️ Forever Yours, Soumik
+      </div>
+    </section>
+
+    <section>
+      <h2>Our Love Clock ⏳</h2>
+      <div class="timer">
+        <div class="time-box">
+          <h3 id="years">00</h3>
+          <p>Years</p>
+        </div>
+        <div class="time-box">
+          <h3 id="months">00</h3>
+          <p>Months</p>
+        </div>
+        <div class="time-box">
+          <h3 id="days">00</h3>
+          <p>Days</p>
+        </div>
+        <div class="time-box">
+          <h3 id="hours">00</h3>
+          <p>Hours</p>
+        </div>
+        <div class="time-box">
+          <h3 id="minutes">00</h3>
+          <p>Minutes</p>
+        </div>
+        <div class="time-box">
+          <h3 id="seconds">00</h3>
+          <p>Seconds</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Why I Love You 💖</h2>
+      <p class="message" id="loveText">Click below ❤️</p>
+      <div style="text-align: center">
+        <button class="btn" onclick="generateLove()">Tell Me Why 😘</button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Our Memories 📸</h2>
+
+      <div class="year-title">2023-24</div>
+      <div class="gallery">
+        <img src="./Soumk (7).jpg" />
+        <img src="./Soumk (6).jpg" />
+        <img src="./Soumk (5).jpg" />
+      </div>
+
+      <div class="year-title">2024</div>
+      <div class="gallery">
+        <img src="./Soumk (2).jpg" />
+        <img src="./Soumk (9).jpg" />
+        <img src="./Soumk (8).jpg" />
+      </div>
+
+      <div class="year-title">2025</div>
+      <div class="gallery">
+        <img src="./Soumk.jpg" />
+        <img src="./Soumk (1).jpg" />
+        <img src="./Soumk (3).jpg" />
+      </div>
+    </section>
+
+    <!-- Fullscreen Image Viewer -->
+    <div id="viewer" onclick="closeViewer()">
+      <span>&times;</span>
+      <img id="viewerImg" src="" alt="memory" />
+    </div>
+
+    <section>
+      <h2>Our Song 🎵</h2>
+      <div class="music-card">
+        <div class="music-title">Our Special Song 💖</div>
+        <div class="music-sub">Every beat reminds me of you</div>
+        <audio controls>
+          <source src="./videoplayback.m4a" type="audio/mpeg" />
+        </audio>
+      </div>
+    </section>
+
+    <section>
+      <h2>Love Notes 💌</h2>
+      <div class="notes">
+        <div class="note">
+          Everything in this world feels complete when I am with you 😘
+        </div>
+        <div class="note">You My favorite person 💕</div>
+        <div class="note">I always want you to be my Wife❤️</div>
+        <div class="note">My queen 👑</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>My Promise 💍</h2>
+      <p class="message" id="promiseText">Rupali, will you be mine forever?</p>
+      <div style="text-align: center">
+        <button class="btn" onclick="proposal()">Open My Promise 💖</button>
+      </div>
+    </section>
+
+    <footer>Made with infinite ❤️ by Soumik for Rupali</footer>
+
+    <script>
+      const PASSWORD = "rupali21";
+
+      function unlock() {
+        const p = document.getElementById("pass").value;
+        if (p === PASSWORD) {
+          document.getElementById("lockScreen").style.display = "none";
+        } else {
+          document.getElementById("error").innerText = "Wrong password 💔";
+        }
+      }
+
+      const startDate = new Date("2022-08-21T00:00:00");
+      function updateClock() {
+        const diff = new Date() - startDate;
+        let s = Math.floor(diff / 1000),
+          m = Math.floor(s / 60),
+          h = Math.floor(m / 60),
+          d = Math.floor(h / 24),
+          mo = Math.floor(d / 30.44),
+          y = Math.floor(mo / 12);
+        mo %= 12;
+        d %= 30;
+        h %= 24;
+        m %= 60;
+        s %= 60;
+        years.textContent = String(y).padStart(2, "0");
+        months.textContent = String(mo).padStart(2, "0");
+        days.textContent = String(d).padStart(2, "0");
+        hours.textContent = String(h).padStart(2, "0");
+        minutes.textContent = String(m).padStart(2, "0");
+        seconds.textContent = String(s).padStart(2, "0");
+      }
+      setInterval(updateClock, 1000);
+      updateClock();
+
+      const reasons = [
+        "Because your smile makes my day ☀️",
+        "Because you understand me 💕",
+        "Because you are my peace 😌",
+        "Because you support my dreams 🌸",
+        "Because you are beautiful inside and out 😍",
+        "Because you are my home 🏠",
+        "Because life is better with you ❤️",
+        "Because you are my future 💍",
+        "Because you are my miracle ✨",
+      ];
+      function generateLove() {
+        loveText.textContent =
+          reasons[Math.floor(Math.random() * reasons.length)];
+      }
+
+      const promises = [
+        "I promise to protect your smile forever 😘",
+        "I promise to stand by you in every storm 🌧️",
+        "I promise to love you more every day ❤️",
+        "I promise you my loyalty, heart, and life 💍",
+        "I promise to choose you again and again 💕",
+        "I promise you my forever 🫶",
+      ];
+      function proposal() {
+        const p = promises[Math.floor(Math.random() * promises.length)];
+        promiseText.textContent = p;
+        alert(
+          "Rupali ❤️💍\n" + p + "\n\nWill you stay with me forever?\n— Soumik",
+        );
+      }
+
+      function createHeart() {
+        const h = document.createElement("div");
+        h.className = "heart";
+        h.textContent = "❤️";
+        h.style.left = Math.random() * 100 + "vw";
+        h.style.fontSize = 15 + Math.random() * 20 + "px";
+        document.body.appendChild(h);
+        setTimeout(() => h.remove(), 6000);
+      }
+      setInterval(createHeart, 500);
+
+      // Tap-to-fullscreen gallery (scalable for future years)
+      document.querySelectorAll(".gallery img").forEach((img) => {
+        img.addEventListener("click", () => openViewer(img.src));
+      });
+
+      function openViewer(src) {
+        const v = document.getElementById("viewer");
+        document.getElementById("viewerImg").src = src;
+        v.style.display = "flex";
+      }
+      function closeViewer() {
+        document.getElementById("viewer").style.display = "none";
+      }
+    </script>
+  </body>
+</html>
